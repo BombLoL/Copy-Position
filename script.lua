@@ -9,6 +9,7 @@ function randomString()
 	return table.concat(array)
 end
 
+local coregui = game:GetService("CoreGui")
 local copymovement = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame")
 local UICorner = Instance.new("UICorner")
@@ -23,7 +24,7 @@ local reset = Instance.new("TextButton")
 local UICorner_4 = Instance.new("UICorner")
 
 copymovement.Name = randomString()
-copymovement.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+copymovement.Parent = coregui
 copymovement.ResetOnSpawn = false
 
 Frame.Parent = copymovement
