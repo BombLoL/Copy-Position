@@ -54,8 +54,7 @@ local UICorner_4 = Instance.new("UICorner")
 --Properties:
 
 copymovement.Name = "copy movement"
-copymovement.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-copymovement.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+copymovement.Parent = game:GetService("CoreGui")
 copymovement.ResetOnSpawn = false
 
 Frame.Parent = copymovement
