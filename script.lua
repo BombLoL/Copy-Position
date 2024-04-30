@@ -23,7 +23,7 @@ local UICorner_3 = Instance.new("UICorner")
 local reset = Instance.new("TextButton")
 local UICorner_4 = Instance.new("UICorner")
 
-copymovement.Name = randomString()
+copymovement.Name = "e"
 copymovement.Parent = coregui
 copymovement.ResetOnSpawn = false
 
@@ -39,7 +39,7 @@ Frame.ZIndex = 999999999
 UICorner.CornerRadius = UDim.new(0, 4)
 UICorner.Parent = Frame
 
-title.Name = randomString()
+title.Name = "b"
 title.Parent = Frame
 title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 title.BackgroundTransparency = 1.000
