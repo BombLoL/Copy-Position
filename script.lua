@@ -1,15 +1,8 @@
--- made by .xyveria
+-- Gui to Lua
+-- Version: 3.2
 
-function randomString()
-	local length = math.random(10,20)
-	local array = {}
-	for i = 1, length do
-		array[i] = string.char(math.random(32, 126))
-	end
-	return table.concat(array)
-end
+-- Instances:
 
-local coregui = game:GetService("CoreGui")
 local copymovement = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame")
 local UICorner = Instance.new("UICorner")
@@ -23,8 +16,11 @@ local UICorner_3 = Instance.new("UICorner")
 local reset = Instance.new("TextButton")
 local UICorner_4 = Instance.new("UICorner")
 
-copymovement.Name = "e"
-copymovement.Parent = coregui
+--Properties:
+
+copymovement.Name = "copy movement"
+copymovement.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+copymovement.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 copymovement.ResetOnSpawn = false
 
 Frame.Parent = copymovement
@@ -39,7 +35,7 @@ Frame.ZIndex = 999999999
 UICorner.CornerRadius = UDim.new(0, 4)
 UICorner.Parent = Frame
 
-title.Name = "b"
+title.Name = "title"
 title.Parent = Frame
 title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 title.BackgroundTransparency = 1.000
@@ -55,7 +51,7 @@ title.TextScaled = true
 title.TextSize = 14.000
 title.TextWrapped = true
 
-desc.Name = randomString()
+desc.Name = "desc"
 desc.Parent = Frame
 desc.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 desc.BackgroundTransparency = 1.000
@@ -143,7 +139,9 @@ reset.TextWrapped = true
 UICorner_4.CornerRadius = UDim.new(0, 3)
 UICorner_4.Parent = reset
 
-function copyMovement()
+-- Scripts:
+
+local function YZMV_fake_script() -- copy.onClick 
 	local script = Instance.new('LocalScript', copy)
 
 	script.Parent.MouseButton1Click:Connect(function()
@@ -155,14 +153,14 @@ function copyMovement()
 		
 		while task.wait() do
 			
-			char.HumanoidRootPart.CFrame = targetWs.HumanoidRootPart.CFrame + Vector3.new(0, 20, 0)
+			char.HumanoidRootPart.CFrame = targetWs.HumanoidRootPart.CFrame + Vector3.new(0, 15, 0)
 			
 		end
 		
 	end)
 end
-copyMovement()
-function reset()
+coroutine.wrap(YZMV_fake_script)()
+local function ZBKRK_fake_script() -- reset.onClick 
 	local script = Instance.new('LocalScript', reset)
 
 	script.Parent.MouseButton1Click:Connect(function()
@@ -174,13 +172,60 @@ function reset()
 		
 	end)
 end
-reset()
-function dragging()
-	local script = Instance.new('LocalScript', Frame)
+coroutine.wrap(ZBKRK_fake_script)()
+local function NJQUP_fake_script() -- Frame.ajjajajajaj 
+	local UserInputService = game:GetService("UserInputService")
+	local runService = (game:GetService("RunService"));
 
-	local f=script.Parent
-	f.Active=true
-	f.Selectable=true
-	f.Draggable=true
+	local gui = script.Parent
+
+	local dragging
+	local dragInput
+	local dragStart
+	local startPos
+
+	function Lerp(a, b, m)
+		return a + (b - a) * m
+	end;
+
+	local lastMousePos
+	local lastGoalPos
+	local DRAG_SPEED = (8); -- // The speed of the UI darg.
+	function Update(dt)
+		if not (startPos) then return end;
+		if not (dragging) and (lastGoalPos) then
+			gui.Position = UDim2.new(startPos.X.Scale, Lerp(gui.Position.X.Offset, lastGoalPos.X.Offset, dt * DRAG_SPEED), startPos.Y.Scale, Lerp(gui.Position.Y.Offset, lastGoalPos.Y.Offset, dt * DRAG_SPEED))
+			return 
+		end;
+
+		local delta = (lastMousePos - UserInputService:GetMouseLocation())
+		local xGoal = (startPos.X.Offset - delta.X);
+		local yGoal = (startPos.Y.Offset - delta.Y);
+		lastGoalPos = UDim2.new(startPos.X.Scale, xGoal, startPos.Y.Scale, yGoal)
+		gui.Position = UDim2.new(startPos.X.Scale, Lerp(gui.Position.X.Offset, xGoal, dt * DRAG_SPEED), startPos.Y.Scale, Lerp(gui.Position.Y.Offset, yGoal, dt * DRAG_SPEED))
+	end;
+
+	gui.InputBegan:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+			dragging = true
+			dragStart = input.Position
+			startPos = gui.Position
+			lastMousePos = UserInputService:GetMouseLocation()
+
+			input.Changed:Connect(function()
+				if input.UserInputState == Enum.UserInputState.End then
+					dragging = false
+				end
+			end)
+		end
+	end)
+
+	gui.InputChanged:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+			dragInput = input
+		end
+	end)
+
+	runService.Heartbeat:Connect(Update)
 end
-dragging()
+coroutine.wrap(NJQUP_fake_script)()
