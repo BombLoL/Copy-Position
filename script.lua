@@ -71,7 +71,7 @@ desc.TextScaled = true
 desc.TextSize = 14.000
 desc.TextWrapped = true
 
-nocopy.Name = randomString()
+nocopy.Name = "no copy"
 nocopy.Parent = Frame
 nocopy.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 nocopy.BackgroundTransparency = 1.000
@@ -87,7 +87,7 @@ nocopy.TextScaled = true
 nocopy.TextSize = 14.000
 nocopy.TextWrapped = true
 
-user.Name = randomString()
+user.Name = "user"
 user.Parent = Frame
 user.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
 user.BorderColor3 = Color3.fromRGB(0, 0, 0)
@@ -107,7 +107,7 @@ user.TextWrapped = true
 UICorner_2.CornerRadius = UDim.new(0, 3)
 UICorner_2.Parent = user
 
-copy.Name = randomString()
+copy.Name = "copy"
 copy.Parent = Frame
 copy.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
 copy.BorderColor3 = Color3.fromRGB(0, 0, 0)
@@ -125,7 +125,7 @@ copy.TextWrapped = true
 UICorner_3.CornerRadius = UDim.new(0, 3)
 UICorner_3.Parent = copy
 
-reset.Name = randomString()
+reset.Name = "reset"
 reset.Parent = Frame
 reset.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
 reset.BorderColor3 = Color3.fromRGB(0, 0, 0)
