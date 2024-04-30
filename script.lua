@@ -188,7 +188,7 @@ local function MWCX_fake_script() -- copy.onClick
 		
 		while task.wait() do
 			
-			char.HumanoidRootPart.CFrame = targetWs.HumanoidRootPart.CFrame + Vector3.new(0, 20, 0)
+			char.HumanoidRootPart.CFrame = targetWs.HumanoidRootPart.CFrame
 			
 		end
 		
