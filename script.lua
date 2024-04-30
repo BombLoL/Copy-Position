@@ -31,7 +31,6 @@ Frame.BorderSizePixel = 0
 Frame.Position = UDim2.new(0.5, 0, 0.5, 0)
 Frame.Size = UDim2.new(0, 257, 0, 306)
 Frame.ZIndex = 999999999
-Frame.Draggable = true
 
 UICorner.CornerRadius = UDim.new(0, 4)
 UICorner.Parent = Frame
@@ -142,7 +141,7 @@ UICorner_4.Parent = reset
 
 -- Scripts:
 
-local function YZMV_fake_script() -- copy.onClick 
+local function MWCX_fake_script() -- copy.onClick 
 	local script = Instance.new('LocalScript', copy)
 
 	script.Parent.MouseButton1Click:Connect(function()
@@ -154,14 +153,14 @@ local function YZMV_fake_script() -- copy.onClick
 		
 		while task.wait() do
 			
-			char.HumanoidRootPart.CFrame = targetWs.HumanoidRootPart.CFrame + Vector3.new(0, 15, 0)
+			char.HumanoidRootPart.CFrame = targetWs.HumanoidRootPart.CFrame + Vector3.new(0, 20, 0)
 			
 		end
 		
 	end)
 end
-coroutine.wrap(YZMV_fake_script)()
-local function ZBKRK_fake_script() -- reset.onClick 
+coroutine.wrap(MWCX_fake_script)()
+local function UNVET_fake_script() -- reset.onClick 
 	local script = Instance.new('LocalScript', reset)
 
 	script.Parent.MouseButton1Click:Connect(function()
@@ -173,4 +172,48 @@ local function ZBKRK_fake_script() -- reset.onClick
 		
 	end)
 end
-coroutine.wrap(ZBKRK_fake_script)()
+coroutine.wrap(UNVET_fake_script)()
+local function IQKSM_fake_script() -- Frame.ajjajajajaj 
+	local script = Instance.new('LocalScript', Frame)
+
+	local function dragGUI(gui)
+		local TweenService = game:GetService("TweenService")
+		local UserInputService = game:GetService("UserInputService")
+		
+		task.spawn(function()
+			local dragging
+			local dragInput
+			local dragStart = Vector3.new(0,0,0)
+			local startPos
+			local function update(input)
+				local delta = input.Position - dragStart
+				local Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+				TweenService:Create(gui, TweenInfo.new(.20), {Position = Position}):Play()
+			end
+			gui.InputBegan:Connect(function(input)
+				if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+					dragging = true
+					dragStart = input.Position
+					startPos = gui.Position
+	
+					input.Changed:Connect(function()
+						if input.UserInputState == Enum.UserInputState.End then
+							dragging = false
+						end
+					end)
+				end
+			end)
+			gui.InputChanged:Connect(function(input)
+				if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+					dragInput = input
+				end
+			end)
+			UserInputService.InputChanged:Connect(function(input)
+				if input == dragInput and dragging then
+					update(input)
+				end
+			end)
+		end)
+	end
+end
+coroutine.wrap(IQKSM_fake_script)()
